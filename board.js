@@ -1,9 +1,9 @@
 class Board {
-    constructor(cols = 7 , rows = 6 ) {
+    constructor(cols = 7, rows = 6) {
         this.rows = rows;
         this.cols = cols;
         this.board = this.initBoard(cols, rows);
-        this.totalSpts =cols * rows ;
+        this.totalSpts = cols * rows;
         this.currentSpot = {
             x: null,
             y: null
@@ -24,14 +24,14 @@ class Board {
     }
 
     isFull(slot) {
-       return this.spotCounter >= this.totalSpts ;  
+        return this.spotCounter >= this.totalSpts;
     }
 
     display() {
-        for(let i = this.cols -1; i>=0;i--) {
-            let line = "" ;
-            for(let j = 0 ; j<this.rows;j++) {
-                line += "["+this.getSpot(j,i) +"]";
+        for (let i = this.cols - 1; i >= 0; i--) {
+            let line = "";
+            for (let j = 0; j < this.rows; j++) {
+                line += "[" + this.getSpot(j, i) + "]";
             }
             console.log(line)
         }
@@ -44,7 +44,7 @@ class Board {
     }
 
     testOption(p1, p2, p3, p4) {
-        
+
         return (p1 == p2 && p2 == p3 && p3 == p4)
     }
 
@@ -59,11 +59,11 @@ class Board {
         let X = this.currentSpot.x;
         let Y = this.currentSpot.y;
         let C = this.board[this.currentSpot.x][this.currentSpot.y];
-        return this.checkConnect4(C,X,Y)
+        return this.checkConnect4(C, X, Y)
     }
 
 
-    
+
 
     checkConnect4(C,X,Y) { 
         const checkPoints = [

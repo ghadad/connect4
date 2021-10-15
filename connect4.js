@@ -9,34 +9,33 @@ const question = function (q) {
   })
 }
 
-
 class Connect4Game {
-  constructor(cols=7,rows=6) {
+  constructor(cols = 7, rows = 6) {
     this.player;
     this.gameOver = false;
-    this.cols = cols ;
-    this.rows = rows ;
-    
-    this.board = new Board(cols,rows)
+    this.cols = cols;
+    this.rows = rows;
+
+    this.board = new Board(cols, rows)
   }
 
   async start() {
     this.player = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
-    console.log("**********************************************")
-    console.log("GAME START !!! player " + this.player + " your turn to play  ");
-    console.log("**********************************************")
+    console.log("**************************************************")
+    console.log("GAME START !!! The randomly selected player is :", this.player)
+    console.log("*************************************************")
 
     while (!this.board.isFull()) {
       await this.chooseSlot()
     }
-      console.log("No winner !!! ")
+    console.log("No winner !!! ")
   }
 
 
 
   async chooseSlot() {
     let slot;
-    console.log("Player " + this.player + " your turn to play")
+    console.log("Player " + this.player + " your turn to choose free slot :")
     try {
       slot = await question('Choose free slot ? ');
       slot = this.validateSlot(slot);
@@ -47,11 +46,8 @@ class Connect4Game {
       return await this.chooseSlot();
     }
 
-
-    
-
     if (this.checkForWinner(slot)) {
-      console.log("Winner is player :", this.player, " after ", this.board.spotCounter, "moves")
+      console.log("Winner is player :", this.player, "after ", this.board.spotCounter, "moves")
       this.board.display()
       process.exit(0);
     };
@@ -65,14 +61,14 @@ class Connect4Game {
 
   validateSlot(slot) {
     let [num] = slot.match(/\d+/) || [];
-    
-    if (!(num && (num >= 1 && num <=  this.cols))) {
-      console.log("Please choose one of valid slot " ,1,"  - ", this.cols);
+
+    if (!(num && (num >= 1 && num <= this.cols))) {
+      console.log("Please choose one of valid slot ", 1, "  - ", this.cols);
       return 0;
     }
 
-    if(this.board.isSlotFull(num-1)) {
-      console.log("Slot " ,num ,"is full , please choose another !");
+    if (this.board.isSlotFull(num - 1)) {
+      console.log("Slot", num, "is full , please choose another !");
       return 0;
     }
 
@@ -80,7 +76,7 @@ class Connect4Game {
   }
 
   checkForWinner(slot) {
-    return  this.board.putInSlot(slot-1,this.player) ; 
+    return this.board.putInSlot(slot - 1, this.player);
   }
 
 }
