@@ -57,9 +57,9 @@ class Board {
      * Display the board state 
     */     
     display() {
-        for (let i = this.cols - 1; i >= 0; i--) {
+        for (let i = this.rows - 1; i >= 0; i--) {
             let line = "";
-            for (let j = 0; j < this.rows; j++) {
+            for (let j = 0; j < this.cols; j++) {
                 line += "[" + this.getDisplaySpot(j, i) + "]";
             }
             console.log(line)
