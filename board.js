@@ -1,4 +1,4 @@
-/** Class representing a board game  */
+/** Class representing a game  board */
 class Board {
     /**
      * Create a board.
