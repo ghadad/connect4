@@ -10,7 +10,7 @@ class Board {
         this.rows = rows;
         this.cols = cols;
         this.board = this.initBoard(cols, rows);
-        this.totalSpts = cols * rows;
+        this.totalSpots = cols * rows;
         this.currentSpot = {
             x: null,
             y: null
@@ -26,7 +26,7 @@ class Board {
      * Initilize new colsXrows board .
      * @param {number} cols - number of slots.
      * @param {number} rows - number of rows.
-     * @return {object} noard
+     * @return {object} board 
      */   
     initBoard(cols, rows) {
         var x = new Array(cols);
@@ -50,7 +50,7 @@ class Board {
      * @return  {boolean} true/false
     */     
     isFull() {
-        return this.spotCounter >= this.totalSpts;
+        return this.spotCounter >= this.totalSpots;
     }
 
   /**
