@@ -15,8 +15,14 @@ class Connect4Game {
     this.gameOver = false;
     this.cols = cols;
     this.rows = rows;
+    this.chips = { 
+      1:"R" ,
+      2:"Y",
+      "R" :"RED",
+      "Y" :"YELLOW"
+    }
 
-    this.board = new Board(cols, rows)
+    this.board = new Board(cols, rows,this.chips)
   }
 
   async start() {
@@ -35,7 +41,7 @@ class Connect4Game {
 
   async chooseSlot() {
     let slot;
-    console.log("Player " + this.player + " your turn to choose free slot :")
+    console.log("Player " + this.player + " Choose slot to insert " + this.chips[this.chips[this.player]] ,"chip :")
     try {
       slot = await question('Choose free slot ? ');
       slot = this.validateSlot(slot);
@@ -45,10 +51,10 @@ class Connect4Game {
       console.error('Question rejected', err);
       return await this.chooseSlot();
     }
-
+  
     if (this.checkForWinner(slot)) {
       console.log("Winner is player :", this.player, "after ", this.board.spotCounter, "moves")
-      this.board.display()
+     
       process.exit(0);
     };
 
@@ -76,7 +82,9 @@ class Connect4Game {
   }
 
   checkForWinner(slot) {
-    return this.board.putInSlot(slot - 1, this.player);
+    let isWin = this.board.putInSlot(slot - 1, this.player);
+    this.board.display();
+    return isWin;
   }
 
 }

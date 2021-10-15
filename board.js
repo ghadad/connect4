@@ -1,5 +1,5 @@
 class Board {
-    constructor(cols = 7, rows = 6) {
+    constructor(cols = 7, rows = 6 ,chips) {
         this.rows = rows;
         this.cols = cols;
         this.board = this.initBoard(cols, rows);
@@ -9,6 +9,10 @@ class Board {
             y: null
         };
         this.spotCounter = 0;
+
+        this.chips = {'1':'R','2':'Y','empty':' '} ;
+        Object.assign(this.chips,chips);
+
     }
 
     initBoard(cols, rows) {
@@ -31,7 +35,7 @@ class Board {
         for (let i = this.cols - 1; i >= 0; i--) {
             let line = "";
             for (let j = 0; j < this.rows; j++) {
-                line += "[" + this.getSpot(j, i) + "]";
+                line += "[" + this.getDisplaySpot(j, i) + "]";
             }
             console.log(line)
         }
@@ -43,8 +47,13 @@ class Board {
         return 0;
     }
 
-    testOption(p1, p2, p3, p4) {
+    getDisplaySpot(x, y) {
+        if (this.board[x] && this.board[x][y])
+            return this.chips[''+this.board[x][y]];
+        return this.chips.empty;
+    }
 
+    testOption(p1, p2, p3, p4) {
         return (p1 == p2 && p2 == p3 && p3 == p4)
     }
 
@@ -78,15 +87,15 @@ class Board {
 
             // left Diagonal
             [[X-1,Y+1],[X-2,Y+2],[X-3,Y+3]],
-            [[X-1,Y+1],[X-2,Y+2],[X-3,Y+3]],
-            [[X-1,Y+1],[X-2,Y+2],[X-3,Y+3]],
-            [[X-1,Y+1],[X-2,Y+2],[X-3,Y+3]],
+            [[X-1,Y+1],[X-2,Y+2],[X+1,Y-1]],
+            [[X-1,Y+1],[X+2,Y-2],[X+1,Y-1]],
+            [[X+1,Y-1],[X+2,Y-2],[X+3,Y-3]],
 
             // right Diagonal
             [[X+1,Y+1],[X+2,Y+2],[X+3,Y+3]],
             [[X-1,Y-1],[X+1,Y+1],[X+2,Y+2]],
-            [[X-2,Y-2],[X+1,Y+1],[X+2,Y+2]],
-            [[X-3,Y-2],[X-2,Y-2],[X-1,Y-3]]
+            [[X-2,Y-2],[X-1,Y-1],[X+1,Y+1]],
+            [[X-3,Y-3],[X-2,Y-2],[X-1,Y-1]],
         ]
 
         
