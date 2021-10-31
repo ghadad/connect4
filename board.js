@@ -1,3 +1,4 @@
+/* test geritt commit */
 /** Class representing a game  board */
 class Board {
     /**
